@@ -1,0 +1,49 @@
+[gd_scene load_steps=7 format=3 uid="uid://c84igsblc3o0c"]
+
+[ext_resource type="Texture2D" uid="uid://ckq7onxt5fhgr" path="res://white_square.svg" id="1_baghe"]
+[ext_resource type="Script" uid="uid://vjd0opr1rfa2" path="res://snake.gd" id="1_gxkgb"]
+[ext_resource type="AudioStream" uid="uid://21gwrvi0b24p" path="res://movement_SFX.wav" id="3_2x2sd"]
+[ext_resource type="AudioStream" uid="uid://bfxewun214cey" path="res://dead_SFX.wav" id="4_olj5u"]
+[ext_resource type="AudioStream" uid="uid://ccg10ifvkunk1" path="res://food_collect_SFX.wav" id="5_dw1s1"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gxkgb"]
+size = Vector2(16, 16)
+
+[node name="Snake" type="Node2D"]
+script = ExtResource("1_gxkgb")
+
+[node name="Head" type="Area2D" parent="." groups=["body_part_group"]]
+unique_name_in_owner = true
+position = Vector2(16, 16)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Head"]
+shape = SubResource("RectangleShape2D_gxkgb")
+
+[node name="Head" type="Sprite2D" parent="Head"]
+scale = Vector2(0.516129, 0.516129)
+texture = ExtResource("1_baghe")
+
+[node name="Body" type="Node2D" parent="."]
+unique_name_in_owner = true
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.1
+autostart = true
+
+[node name="Score" type="Label" parent="."]
+unique_name_in_owner = true
+offset_right = 40.0
+offset_bottom = 23.0
+theme_override_font_sizes/font_size = 32
+text = "Score: 0"
+
+[node name="movement_SFX" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_2x2sd")
+volume_db = -5.0
+
+[node name="dead_SFX" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_olj5u")
+
+[node name="food_collect_SFX" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("5_dw1s1")
+volume_db = 3.0
